@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/aside.css">
+    {% block css %}{% endblock %}
+    <title>{% block title %}Base Title{% endblock %}</title>
+</head>
+
+
+
+<body>
+<aside id="sidenav-main" class="sidenav">
+    <div class="sidenav-header">
+        <span class="title"><img src="../static/images/music.png" alt="">XX平台数据分析</span>
+    </div>
+
+    <div class="sidenav-content">
+        <ul>
+            <a href={{ url_for("index") }}><li id="p1"><img src="../static/images/首页.png" alt="">首页</li></a>
+            <a href={{ url_for("topics") }}><li id="p2"><img src="../static/images/首页.png" alt="">话题</li></a>
+            <a href=""><li id="p3"><img src="../static/images/首页.png" alt="">p2</li></a>
+            <a href=""><li id="p4"><img src="../static/images/首页.png" alt="">p3</li></a>
+        </ul>
+    </div>
+</aside>
+{% block content %}{% endblock %}
+</body>
+
+<script src="../static/js/aside.js"></script>
+{% block js %}
+{% endblock %}
+
+</html>

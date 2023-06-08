@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/echarts.min.js"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <header>
+        <a href="" class="star"></a>
+    </header>
+        <div class="row1">
+            <div class="row1-card">
+                <div class="cardIn">
+                    <div class="icon i1"></div>
+                    <p><span class="change">{{ topicCountChanged }}</span> than last day</p>
+                    <p>话题总数</p>
+                    <h4>{{ topicsCount }}</h4>
+                    <hr class="horizontal">
+
+                </div>
+
+            </div>
+            <div class="row1-card">
+                <div class="cardIn">
+                    <div class="icon i2"></div>
+                    <p><span class="change">{{ searchCountChanged }}</span> than last day</p>
+                    <p>热搜总数</p>
+                    <h4>{{ searchCount }}</h4>
+                    <hr class="horizontal">
+                </div>
+
+            </div>
+            <div class="row1-card">
+                <div class="cardIn">
+                    <div class="icon i3"></div>
+                    <p><span class="change">{{ mCountChanged }}</span> than last day</p>
+                    <p>发文总数</p>
+                    <h4>{{ mCount }}</h4>
+                    <hr class="horizontal">
+
+                </div>
+
+            </div>
+            <div class="row1-card">
+                <div class="cardIn">
+                    <div class="icon i4"></div>
+                    <p><span class="change">{{ commentsCountChanged }}</span> than last day</p>
+                    <p>评论总数</p>
+                    <h4>{{ commentsCount }}</h4>
+                    <hr class="horizontal">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row2">
+            <div class="row2-card">
+                <div>
+                    <div class="chart-bars" id="chart1"></div>
+                    <div class="info">
+                        <p>热搜趋势</p>
+                        <p class="val">今日热搜数目: <span id="searchCountToday">{{ searchCountToday }}</span></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row2-card">
+                <div>
+                    <div class="chart-bars" id="chart2"></div>
+                    <div class="info">
+                        <p>讨论趋势</p>
+                        <p class="val">zhanweizhanwei</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row2-card">
+                <div>
+                    <div class="chart-bars" id="chart3"></div>
+                    <div class="info">
+                        <p>讨论趋势</p>
+                        <p class="val">zhanweizhanwei</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row3">
+            <p>Recent Topics</p>
+{#            <p><span id="changeNum">24</span> done this day</p>#}
+            <div class="topic-list">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>话题名称</th>
+                        <th>阅读量</th>
+                        <th>讨论量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for _ in topicList %}
+                        <tr>
+                            <td><a href={{ _[3] }}>{{ _[0] }}</a></td>
+                            <td>{{ _[2] }}</td>
+                            <td>{{ _[1] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer>© 2023, made by venyy</footer>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="../static/js/showCharts.js"></script>
+{% endblock %}
