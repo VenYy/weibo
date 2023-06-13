@@ -10,9 +10,21 @@
 
 {% block content %}
     <div class="container">
-    <header>
-        <a href="" class="star"></a>
-    </header>
+        <header>
+            <div class="funcs">
+                <ul>
+                    <li>
+                        <a href="https://github.com/VenYy/weibo" class="star">
+                            <svg viewBox="0 0 16 16" width="16" height="16" class="octicon octicon-star"
+                                 aria-hidden="true">
+                                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"></path>
+                            </svg>
+                            Star</a>
+                    </li>
+                    <li><a href="{{ url_for('login') }}" class="login"> Sign in</a></li>
+                </ul>
+            </div>
+        </header>
         <div class="row1">
             <div class="row1-card">
                 <div class="cardIn">
@@ -73,8 +85,8 @@
                 <div>
                     <div class="chart-bars" id="chart2"></div>
                     <div class="info">
-                        <p>讨论趋势</p>
-                        <p class="val">zhanweizhanwei</p>
+                        <p>评论来源分布</p>
+{#                        <p class="val">zhanweizhanwei</p>#}
                     </div>
                 </div>
 
@@ -91,33 +103,56 @@
             </div>
         </div>
         <div class="row3">
-            <p>Recent Topics</p>
-{#            <p><span id="changeNum">24</span> done this day</p>#}
-            <div class="topic-list">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>话题名称</th>
-                        <th>阅读量</th>
-                        <th>讨论量</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for _ in topicList %}
+            <div class="row3-left">
+                <p>Recent Topics</p>
+                {#            <p><span id="changeNum">24</span> done this day</p>#}
+                <div class="topic-list">
+                    <table>
+                        <thead>
                         <tr>
-                            <td><a href={{ _[3] }}>{{ _[0] }}</a></td>
-                            <td>{{ _[2] }}</td>
-                            <td>{{ _[1] }}</td>
+                            <th>话题名称</th>
+                            <th>阅读量</th>
+                            <th>讨论量</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        {% for _ in topicList %}
+                            <tr>
+                                <td><a href={{ _[3] }}>{{ _[0] }}</a></td>
+                                <td>{{ _[2] }}</td>
+                                <td class="selector-hot" data-hot="{{ _[1] }}">{{ _[1] }}</td>
+                            </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        <div class="row3-right">
+            <p>Hot search</p>
+            <div class="hotSearch-list">
+                <table>
+                        <thead>
+                        <tr>
+                            <th>热搜名称</th>
+                            <th>热度</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for _ in hotsearchList %}
+                            <tr>
+                                <td><a href={{ _[2] }}>{{ _[0] }}</a></td>
+                                <td>{{ _[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
         </div>
         <footer>© 2023, made by venyy</footer>
     </div>
 {% endblock %}
 
 {% block js %}
-    <script src="../static/js/showCharts.js"></script>
+    <script src="../static/js/style.js"></script>
 {% endblock %}

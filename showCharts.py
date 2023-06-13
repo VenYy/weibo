@@ -12,7 +12,7 @@ from spider.DBManager import DBManager
 chartApi = Blueprint("chartApi", __name__, url_prefix="/chartApi")
 
 
-def showChart(data):
+def showChart1(data):
     line = Line()
     line.set_global_opts(
         title_opts=opts.TitleOpts(is_show=False),
@@ -64,6 +64,30 @@ def showChart(data):
     return grid
 
 
+def showChart2(data):
+    pie = Pie()
+    pie.set_global_opts(
+        legend_opts=opts.LegendOpts(
+            type_="scroll",
+            orient="vertical",
+            selector_position="start",
+            is_page_animation=True,
+            pos_left="70%",
+            pos_top="5%", pos_bottom="5%",
+            border_width=0,
+            textstyle_opts=opts.TextStyleOpts(color="#35353b", font_weight="bold")
+        )
+    )
+    pie.add("", data,
+            radius="85%",
+            center=["35%", "50%"],      # 圆心位置
+            label_opts=opts.LabelOpts(is_show=False,
+                                      position="inside",
+                                      font_size=10,
+                                      color="white",))
+    return pie
+
+
 @chartApi.route("/chart1")
 def chart1():
     db = DBManager()
@@ -78,8 +102,25 @@ def chart1():
         hotsearchTrendData = {"x": list(x for x, y in hotsearchTrend[::-1]),
                               "y": list(y for x, y in hotsearchTrend[::-1])}
     # print(hotsearchTrendData)
-    line = showChart(hotsearchTrendData)
+    line = showChart1(hotsearchTrendData)
     return line.dump_options_with_quotes()
+
+
+@chartApi.route("/chart2")
+def chart2():
+    db = DBManager()
+    with db.session as cursor:
+        data = cursor.execute(text(
+            "select source, count(*) as count "
+            "from comments "
+            "group by source "
+            "having source != '' "
+            "order by count desc "
+            "limit 15;"
+        )).fetchall()
+
+    pie = showChart2(data)
+    return pie.dump_options_with_quotes()
 
 
 # @chartApi.route("/chart2")

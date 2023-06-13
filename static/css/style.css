@@ -10,9 +10,68 @@
 header {
     position: relative;
     height: 50px;
-    width: 1300px;
+    width: 1270px;
 }
 
+.funcs {
+    height: 16px;
+    line-height: 50px;
+    float: right;
+}
+
+.funcs ul {
+    list-style: none;
+}
+
+.funcs li {
+    float: left;
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+.funcs a {
+    color: #24292f;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.star {
+    height: 16px;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.star svg {
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    vertical-align: text-top;
+}
+
+.star:active {
+    background-color: #e5e9ed;
+    border-color: #c7cbcf;
+    border-color: rgba(31, 35, 40, .15);
+    background-image: none;
+    filter: none;
+}
+
+.star:hover {
+    background-color: #e9ebef;
+}
+
+.login::before {
+    display: inline-block;
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-image: url("/static/images/person.png");
+    background-size: cover;
+    vertical-align: text-top;
+}
 
 .row1 {
     position: relative;
@@ -164,14 +223,10 @@ header {
     /*background-image: url("/static/images/chart1.png");*/
 }
 
-#chart1 canvas {
-    display: block;
-    box-sizing: border-box;
-}
 
 #chart2 {
     background-color: #5bb25f;
-    background-image: url("/static/images/chart2.png");
+    /*background-image: url("/static/images/chart2.png");*/
 }
 
 #chart3 {
@@ -206,27 +261,36 @@ header {
 
 .row3 {
     position: relative;
-    /*height: 400px;*/
-    width: 830px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    /*border: 1px solid #ccc;*/
+    overflow: hidden;
+    height: auto;
+    width: 1270px;
+    border: none;
+
 }
 
-.row3 > p:first-child {
+.row3-left {
+    z-index: 1;
+    width: 830px;
+    height: auto;
+    float: left;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.row3 p {
     font-weight: bold;
     font-size: 14px;
-    top: 0;
+    margin-top: 15px;
     margin-left: 25px;
 }
 
-.row3 > p:nth-child(2) {
-    margin-left: 25px;
-    margin-top: 5px;
-    color: #9a9db1;
-    font-size: 12px;
-}
+/*.row3 > p:nth-child(2) {*/
+/*    margin-left: 25px;*/
+/*    margin-top: 5px;*/
+/*    color: #9a9db1;*/
+/*    font-size: 12px;*/
+/*}*/
 
 #changeNum {
     font-weight: bold;
@@ -236,16 +300,23 @@ header {
 table {
     width: 100%;
     /*padding: 0 20px;*/
-    margin-top: 20px;
+    margin-top: 10px;
     color: #7e839c;
     border-collapse: collapse;
+
     /*margin-left: 20px;*/
 }
 
 table a {
     text-decoration: none;
     color: #445573;
+    transition: .2s;
 }
+
+table a:hover {
+    color: #5bb25f;
+}
+
 
 table thead {
     color: #abaebf;
@@ -264,14 +335,45 @@ thead, tbody, tr, td, th {
     padding-left: 25px;
 }
 
+.hot::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("/static/images/hot.png");
+    background-size: contain;
+    vertical-align: text-top;
+}
+
+
+.row3-right {
+    float: right;
+    top: 0;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.row3-right table tbody tr:first-child td:first-child:after,
+.row3-right table tbody tr:nth-child(2) td:first-child:after,
+.row3-right table tbody tr:nth-child(3) td:first-child:after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("/static/images/持续上涨.png");
+    background-size: contain;
+    vertical-align: text-top;
+}
 
 
 footer {
-    height: 100px;
+    height: 50px;
     width: 1300px;
     position: relative;
     color: #7b809a;
     font-size: 14px;
-    line-height: 100px;
+    line-height: 50px;
     margin-left: 10px;
 }

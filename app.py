@@ -74,6 +74,7 @@ def index():
             commentsCount = commentsData[0]
             commentsCountChanged = commentsData[1]
 
+        # 今日热搜数量
         searchCountToday = cursor.execute(text("SELECT COUNT(distinct word) "
                                                "FROM hotsearch "
                                                "WHERE DATE(timeStamp) = CURDATE() "
@@ -81,14 +82,21 @@ def index():
                                                "(SELECT DISTINCT word FROM hotsearch "
                                                "WHERE DATE(timeStamp) < CURDATE())")).fetchone()[0]
 
+        # 最新话题
         topicList = cursor.execute(text(
-            "select word, mention, `read`, link, timeStamp "
-            "from topic "
-            "group by word "
-            "having date(timeStamp) = date(date_sub(now(), interval 0 day)) "
-            "order by mention desc limit 10;"
+            "SELECT word, mention, `read`, link, timeStamp "
+            "FROM topic "
+            "WHERE date(timeStamp) = (SELECT MAX(date(timeStamp)) FROM topic) "
+            "order by timeStamp desc limit 10;"
         )).fetchall()
-        print(topicList)
+
+        # 热搜Top 10
+        hotsearchList = cursor.execute(text(
+            "select distinct word, hot, href "
+            "from hotsearch "
+            "order by timeStamp desc, "
+            "hot desc limit 10;"
+        )).fetchall()
 
     return render_template("index.html",
                            topicsCount=topicCount, topicCountChanged=topicCountChanged,
@@ -96,7 +104,17 @@ def index():
                            mCount=mCount, mCountChanged=mCountChanged,
                            searchCountToday=searchCountToday,
                            commentsCount=commentsCount, commentsCountChanged=commentsCountChanged,
-                           topicList=topicList)
+                           topicList=topicList, hotsearchList=hotsearchList)
+
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
 
 @app.route("/topics")

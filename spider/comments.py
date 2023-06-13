@@ -45,7 +45,7 @@ def get_urls(url: list, headers: dict) -> list:
     comments_spider.headers = headers
     try:
         jData = comments_spider.parse_json()
-        time.sleep(1)
+        time.sleep(2)
         if jData["ok"] == 0:
             pass
         else:
@@ -186,7 +186,7 @@ if __name__ == '__main__':
         "select distinct word from topic where mention > 3000 order by timeStamp desc;"
     )).fetchall()
     count = 1
-    words = words[-20:-10]
+    words = words[:20]
     for word in words:
         key = word[0]
         urls = get_base_url(key)
@@ -197,7 +197,7 @@ if __name__ == '__main__':
             headers = {
                 "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 "
                               "Safari/537.36",
-                "cookie": "SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWX-G22uJocjsoTb0INHnxj5JpX5K-hUgL.FoqXSonfeozf1hB2dJLoI7Uc9g44wHvk; SCF=AhqtXeKjJ3bSlCXL9gem3W_9bEvXvqw6MRbaiUdWLfg1Sn4VtqRyTxlCNbiodxKjW44DM_9vdamr771hWHbM9dU.; SUB=_2A25JhOHJDeRhGeBK7VoU8izJwziIHXVqho-BrDV6PUJbktANLVejkW1NR5N03BoFCgKL6ks6jHLdpOl4ATQUDqcC; ALF=1688739481; MLOGIN=1; _T_WM=85570908408; WEIBOCN_FROM=1110106030; XSRF-TOKEN=4111f6; M_WEIBOCN_PARAMS=oid%3D{mid}%26luicode%3D20000061%26lfid%3D{mid}%26uicode%3D20000061%26fid%3D{mid}; mweibo_short_token=1065f9742e"
+                "cookie": "_T_WM=66623045562; XSRF-TOKEN=3a41f8; WEIBOCN_FROM=1110006030; mweibo_short_token=01571e0c24; MLOGIN=1; SCF=AhqtXeKjJ3bSlCXL9gem3W_9bEvXvqw6MRbaiUdWLfg18rU4oepBF0M42PSGOXm05_NWOQHSCuAKyUkJP1Hd1Fg.; SUB=_2A25Jg8NmDeRhGeBK7VoU8izJwziIHXVqj-0urDV6PUJbktAGLRnBkW1NR5N03IYSvGxfHT_1Gv29GTw0fAePv9Hu; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWX-G22uJocjsoTb0INHnxj5JpX5K-hUgL.FoqXSonfeozf1hB2dJLoI7Uc9g44wHvk; SSOLoginState=1686614838; ALF=1689206838; M_WEIBOCN_PARAMS=oid%3D{mid}%26luicode%3D20000061%26lfid%3D{mid}%26uicode%3D20000061%26fid%3D{mid}"
                 .format(mid=mid),
                 "sec-ch-ua": "'Google Chrome';v='111', 'Not(A:Brand';v='8', 'Chromium';v='111'"
             }
